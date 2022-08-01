@@ -1,12 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Supermarket, type: :model do
-  describe 'relationships' do
-    it { should have_many :customers }
-  end
+RSpec.describe 'supermarket show page' do
+  it 'shows the name of the supermarket, with a link to view all of the items. When I click the link I am taken to the supermarkets index page, with a list of unique items for that supermarket' do
 
-  describe 'methods' do
-    it 'has a list of unique items by name' do
     supermarket1 = Supermarket.create!(name: "Walmart", location: "Chicago")
     supermarket2 = Supermarket.create!(name: "Target", location: "Atlanta")
 
@@ -25,7 +21,23 @@ RSpec.describe Supermarket, type: :model do
     customeritem4 = CustomerItem.create!(customer_id: customer1.id, item_id: item3.id)
     customeritem5 = CustomerItem.create!(customer_id: customer1.id, item_id: item1.id)
 
-    expect(supermarket1.unique_items).to eq(["toothpaste", "bread", "TV"])
+    visit "/supermarkets/#{supermarket1.id}"
+    expect(current_path).to eq("/supermarkets/#{supermarket1.id}")
+    expect(page).to have_content("Walmart")
+    expect(page).to_not have_content("Target")
+    expect(page).to have_link("View all Items")
+    click_link "View all Items"
+
+    expect(current_path).to eq("/supermarkets/#{supermarket1.id}/items")
+
+    within '#item-0' do
+      expect(page).to have_content("toothpaste")
+    end
+    within '#item-1' do
+      expect(page).to have_content("bread")
+    end
+    within '#item-2' do
+      expect(page).to have_content("TV")
     end
   end
 end
