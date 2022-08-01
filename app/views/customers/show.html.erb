@@ -1,5 +1,6 @@
 <% @customer.items.each do |item| %>
 <li><%= item.name %></li>
 <li><%= @customer.supermarket.name %></li>
-
 <% end %>
+
+<p> Total = <%= @customer.total_price %> </p>
