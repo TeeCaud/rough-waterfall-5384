@@ -1,3 +1,5 @@
+tyler caudill
+
 # Supermarket Sweep
 
 Fork this repository and clone your newly created repository. At the end of the challenge, push your code to your repository and DM all of the instructors with the link to your repository.
@@ -51,7 +53,7 @@ Two migrations have been made for you. The one to many relationship has been set
 
 ```
 Story 1 of 3
-As a visitor, 
+As a visitor,
 When I visit a customer show page,
 I see its a list of its items
 And the name of the supermarket that it belongs to
